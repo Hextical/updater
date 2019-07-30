@@ -6,39 +6,44 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetFileHash {
-    
-    private GetFileHash() {}
+public final class GetFileHash {
 
-    // Gets the 32-bit MurmurHash2 of the .jar file
-    public static long getFileHash(Path path) throws IOException {
+  private static final byte HORIZONTAL_TAB = 9;
+  private static final byte LINE_FEED = 10;
+  private static final byte CARRIAGE_RETURN = 13;
+  private static final byte SPACE = 32;
 
-	// Reads .jar file and turns it into byte[]
-	byte[] fileByteArray = Files.readAllBytes(path);
+  private GetFileHash() {}
 
-	// ArrayList with no whitespace
-	List<Byte> noWs = new ArrayList<>();
+  // Gets the 32-bit MurmurHash2 of the .jar file
+  public static long getFileHash(Path path) throws IOException {
 
-	// Remove any whitespace characters
-	for (byte b : fileByteArray) {
-	    if (!isWhitespaceCharacter(b)) {
-		noWs.add(b);
-	    }
-	}
+    // Reads .jar file and turns it into byte[]
+    byte[] fileByteArray = Files.readAllBytes(path);
 
-	// Convert Byte ArrayList to byte array
-	byte[] result = new byte[noWs.size()];
-	for (int i = 0; i < noWs.size(); i++) {
-	    result[i] = noWs.get(i).byteValue();
-	}
+    // ArrayList with no whitespace
+    List<Byte> noWs = new ArrayList<>();
 
-	return MurmurHash2.hash(result, 1);
-
+    // Remove any whitespace characters
+    for (byte b : fileByteArray) {
+      if (!isWhitespaceCharacter(b)) {
+        noWs.add(b);
+      }
     }
 
-    // Determines if the byte is a whitespace character (look at an ASCII table)
-    private static boolean isWhitespaceCharacter(byte b) {
-	return b == 9 || b == 10 || b == 13 || b == 32;
+    // Convert Byte ArrayList to byte array
+    byte[] result = new byte[noWs.size()];
+    for (int i = 0; i < noWs.size(); i++) {
+      result[i] = noWs.get(i).byteValue();
     }
+
+    return MurmurHash2.hash(result, 1);
+
+  }
+
+  // Determines if the byte is a whitespace character (look at an ASCII table)
+  private static boolean isWhitespaceCharacter(byte b) {
+    return b == HORIZONTAL_TAB || b == LINE_FEED || b == CARRIAGE_RETURN || b == SPACE;
+  }
 
 }
