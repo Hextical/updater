@@ -1,8 +1,0 @@
-com\hexii\updater\Connections.class
-com\hexii\updater\Updater.class
-com\hexii\updater\JSON.class
-com\hexii\updater\Logging.class
-com\hexii\updater\MurmurHash2.class
-com\hexii\updater\FolderOperations.class
-com\hexii\updater\GetFileHash.class
-com\hexii\updater\Time.class
