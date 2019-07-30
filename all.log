@@ -1,0 +1,52 @@
+00:45:44.914 [main] INFO com.hexii.updater.Updater : Starting execution of program...
+00:45:44.929 [main] INFO com.hexii.updater.FolderOperations : Getting folder hashes: C:\Users\hexii\Documents\MultiMC\instances\1.12.2\.minecraft\mods
+00:45:44.929 [main] INFO com.hexii.updater.FolderOperations : Reading folder: C:\Users\hexii\Documents\MultiMC\instances\1.12.2\.minecraft\mods
+00:45:44.929 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: AbyssalCraft Integration-1.12.2-1.8.1.jar
+00:45:45.101 [main] INFO com.hexii.updater.FolderOperations : Hash: 2836324228
+00:45:45.101 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: AbyssalCraft-1.12.2-1.9.10.jar
+00:45:47.195 [main] INFO com.hexii.updater.FolderOperations : Hash: 2202626731
+00:45:47.195 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: ae2stuff-0.7.0.4-mc1.12.2.jar
+00:45:47.257 [main] INFO com.hexii.updater.FolderOperations : Hash: 1154015310
+00:45:47.257 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: AE2WTLib-1.12.2-1.0.30.jar
+00:45:47.257 [main] INFO com.hexii.updater.FolderOperations : Hash: 2963571368
+00:45:47.257 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: AIImprovements-1.12-0.0.1b3.jar
+00:45:47.257 [main] INFO com.hexii.updater.FolderOperations : Hash: 183382139
+00:45:47.257 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: AkashicTome-1.2-12.jar
+00:45:47.257 [main] INFO com.hexii.updater.FolderOperations : Hash: 3030749418
+00:45:47.257 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: Animus-1.12-2.1.4.jar
+00:45:47.273 [main] INFO com.hexii.updater.FolderOperations : Hash: 60244463
+00:45:47.273 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: AppleCore-mc1.12.2-3.2.0.jar
+00:45:47.273 [main] INFO com.hexii.updater.FolderOperations : Hash: 4131795334
+00:45:47.273 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: AppleSkin-mc1.12-1.0.9.jar
+00:45:47.273 [main] INFO com.hexii.updater.FolderOperations : Hash: 1708065614
+00:45:47.273 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: appliedenergistics2-rv6-stable-6.jar
+00:45:47.351 [main] INFO com.hexii.updater.FolderOperations : Hash: 3164930968
+00:45:47.351 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: Arcane Essentials-0.9.jar
+00:45:47.351 [main] INFO com.hexii.updater.FolderOperations : Hash: 535546693
+00:45:47.351 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: astralsorcery-1.12.2-1.10.19.jar
+00:45:48.179 [main] INFO com.hexii.updater.FolderOperations : Hash: 2582075259
+00:45:48.179 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: AttributeFix-1.12.2-1.0.7.jar
+00:45:48.179 [main] INFO com.hexii.updater.FolderOperations : Hash: 1699997921
+00:45:48.179 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: AutoRegLib-1.3-31.jar
+00:45:48.179 [main] INFO com.hexii.updater.FolderOperations : Hash: 170361845
+00:45:48.179 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: BiomesOPlenty-1.12.2-7.0.1.2441-universal.jar
+00:45:48.366 [main] INFO com.hexii.updater.FolderOperations : Hash: 2361565332
+00:45:48.366 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: gigaherz.commons-1.12.1-0.6.4.jar
+00:45:48.366 [main] INFO com.hexii.updater.FolderOperations : Hash: 3937752613
+00:45:48.366 [main] INFO com.hexii.updater.FolderOperations : Computing JAR hash: Nutrition-1.12.2-4.4.0.jar
+00:45:48.445 [main] INFO com.hexii.updater.FolderOperations : Hash: 2482856983
+00:45:48.445 [main] INFO com.hexii.updater.FolderOperations : Hash collection complete.
+00:45:48.445 [main] INFO com.hexii.updater.Connections : Attempting to connect to the Twitch API with all of the hashes...
+00:45:49.226 [main] INFO com.hexii.updater.Connections : Hash connections complete.
+00:45:49.226 [main] INFO com.hexii.updater.Connections : Attempting to connect to the Twitch API with the projectIDs...
+00:45:50.226 [main] INFO com.hexii.updater.Connections : projectID connections complete.
+00:45:50.351 [main] INFO com.hexii.updater.Updater : AutoRegLib-1.3-32.jar
+00:45:50.351 [main] INFO com.hexii.updater.Updater : 	https://edge.forgecdn.net/files/2746/11/AutoRegLib-1.3-32.jar
+00:45:50.351 [main] INFO com.hexii.updater.Updater : appliedenergistics2-rv6-stable-7.jar
+00:45:50.351 [main] INFO com.hexii.updater.Updater : 	https://edge.forgecdn.net/files/2747/63/appliedenergistics2-rv6-stable-7.jar
+00:45:50.351 [main] INFO com.hexii.updater.Updater : AbyssalCraft Integration-1.12.2-1.9.0.jar
+00:45:50.351 [main] INFO com.hexii.updater.Updater : 	https://edge.forgecdn.net/files/2749/615/AbyssalCraft Integration-1.12.2-1.9.0.jar
+00:45:50.351 [main] INFO com.hexii.updater.Updater : {"minecraft":{"version":"1.12.2","modLoaders":[{"id":"forge-14.23.5.2836","primary":true}]},"manifestVersion":1,"name":"","manifestType":"minecraftModpack","files":[{"projectID":"241721","required":true,"fileID":"2716590"},{"projectID":"220318","required":true,"fileID":"2715506"},{"projectID":"248787","required":true,"fileID":"2496585"},{"projectID":"224472","required":true,"fileID":"2679415"},{"projectID":"250363","required":true,"fileID":"2746011"},{"projectID":"280510","required":true,"fileID":"2643906"},{"projectID":"53686","required":true,"fileID":"2744268"},{"projectID":"223794","required":true,"fileID":"2747063"},{"projectID":"229664","required":true,"fileID":"2716324"},{"projectID":"312318","required":true,"fileID":"2720674"},{"projectID":"304024","required":true,"fileID":"2726967"},{"projectID":"234851","required":true,"fileID":"2749615"},{"projectID":"250577","required":true,"fileID":"2648656"},{"projectID":"225194","required":true,"fileID":"2491032"},{"projectID":"233019","required":true,"fileID":"2450734"}],"version":""}
+00:45:50.351 [main] INFO com.hexii.updater.Updater : {"minecraft":{"version":"1.12.2","modLoaders":[{"id":"forge-14.23.5.2836","primary":true}]},"manifestVersion":1,"name":"","manifestType":"minecraftModpack","files":[{"projectID":"225194","required":true,"fileID":"2491032"},{"projectID":"250577","required":true,"fileID":"2648656"},{"projectID":"53686","required":true,"fileID":"2744268"},{"projectID":"220318","required":true,"fileID":"2715506"},{"projectID":"224472","required":true,"fileID":"2679415"},{"projectID":"250363","required":true,"fileID":"2730480"},{"projectID":"312318","required":true,"fileID":"2720674"},{"projectID":"233019","required":true,"fileID":"2450734"},{"projectID":"223794","required":true,"fileID":"2652453"},{"projectID":"280510","required":true,"fileID":"2643906"},{"projectID":"234851","required":true,"fileID":"2688149"},{"projectID":"241721","required":true,"fileID":"2716590"},{"projectID":"229664","required":true,"fileID":"2716324"},{"projectID":"304024","required":true,"fileID":"2726967"},{"projectID":"248787","required":true,"fileID":"2496585"}],"version":""}
+00:45:50.366 [main] INFO com.hexii.updater.Logging : There are 3 available mod updates.
+00:45:50.366 [main] INFO com.hexii.updater.Logging : Program execution time: 5 seconds.
