@@ -39,11 +39,11 @@ public class Manifest {
 	
 	JSONArray files = new JSONArray();
 	
-	for (String key : map.keySet()) {
+	for (Map.Entry<String, List<String>> entry: map.entrySet()) {
 	    JSONObject newfile = new JSONObject();
 	    newfile.put("required", true);
-	    newfile.put("projectID", key);
-	    newfile.put("fileID", map.get(key).get(2));
+	    newfile.put("projectID", entry.getKey());
+	    newfile.put("fileID", entry.getValue().get(2));
 	    files.put(newfile);
 	}
 	

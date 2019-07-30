@@ -8,15 +8,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class FolderOperations {
-    
-    private FolderOperations() {}
 
-    private final static String extension = ".jar";
+    private FolderOperations() {
+    }
+
+    private static final String EXTENSION = ".jar";
 
     private static final Logger log = LogManager.getLogger(FolderOperations.class);
 
@@ -27,22 +29,29 @@ public final class FolderOperations {
 
 	List<Path> files = readFolder(path);
 	List<Long> hashes = jarHash(files);
-	
+
 	log.info("Hash collection complete.");
-	
+
 	return hashes;
 
     }
 
     // Reads a folder and returns a List<Path> of only .jar files with a depth of
     // 10.
-    private static List<Path> readFolder(String path) throws IOException {
+    private static List<Path> readFolder(String path) {
 
 	log.info("Reading folder: " + path);
 
-	return Files.walk(Paths.get(path), 10).filter(p -> p.toString().endsWith(extension))
-		.collect(Collectors.toList());
+	List<Path> result = new ArrayList<>();
 
+	try (Stream<Path> walk = Files.walk(Paths.get(path), 10)) {
+	    result = walk.filter(p -> p.toString().endsWith(EXTENSION)).collect(Collectors.toList());
+	} catch (IOException e) {
+	    log.error("Cannot read folder");
+	}
+	
+	return result;
+	
     }
 
     // Takes a List<Path> and returns all the hashes associated with those .jar

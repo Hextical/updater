@@ -17,7 +17,7 @@ public class GetFileHash {
 	byte[] fileByteArray = Files.readAllBytes(path);
 
 	// ArrayList with no whitespace
-	List<Byte> noWs = new ArrayList<Byte>();
+	List<Byte> noWs = new ArrayList<>();
 
 	// Remove any whitespace characters
 	for (byte b : fileByteArray) {

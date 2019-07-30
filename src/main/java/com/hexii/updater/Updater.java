@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +24,8 @@ public class Updater {
 	long timeStart = System.nanoTime();
 
 	// Path & Game Version
-	final String userPath = "C:\\Users\\hexii\\Documents\\MultiMC\\instances\\1.12.2\\.minecraft\\mods";
-	final String userGameVersion = "1.12.2";
+	final String userPath = args[0];
+	final String userGameVersion = args[1];
 
 	// All hashes of JARs
 	List<Long> hashes = FolderOperations.folderToHash(userPath);
@@ -36,28 +35,28 @@ public class Updater {
 
 	// Key: currentprojectID
 	// Value: currentfileName[0] currentfileID[1]
-	LinkedHashMap<String, List<String>> currentFileMap = JSON.currentFileInfo(jsonObject);
+	Map<String, List<String>> currentFileMap = JSON.currentFileInfo(jsonObject);
 
-	Map<String, JSONArray> JSONS = Connections.connectWithProjectID(currentFileMap);
-	Map<String, List<String>> newMap = new HashMap<String, List<String>>();
+	Map<String, JSONArray> jsons = Connections.connectWithProjectID(currentFileMap);
+	Map<String, List<String>> newMap = new HashMap<>();
 
 	List<String> brokenProjectIDs = Collections.synchronizedList(new ArrayList<String>());
 
-	for (String key : JSONS.keySet()) {
-	    ArrayList<JSONObject> removedstuff = JSON.removeIrrelevantGameVersions(JSONS.get(key), userGameVersion);
+	for (String key : jsons.keySet()) {
+	    List<JSONObject> removedstuff = JSON.removeIrrelevantGameVersions(jsons.get(key), userGameVersion);
 
 	    if (!removedstuff.toString().equals("[]")) {
 		JSONObject bestFile = JSON.findBestFile(removedstuff);
 		String filename = bestFile.get("fileName").toString();
 		String downloadURL = bestFile.get("downloadUrl").toString();
 		String fileID = bestFile.get("id").toString();
-		List<String> stuff = new ArrayList<String>();
+		List<String> stuff = new ArrayList<>();
 		stuff.add(0, filename);
 		stuff.add(1, downloadURL);
 		stuff.add(2, fileID);
 		newMap.put(key, stuff);
 	    } else {
-		System.out.println(key + " is broken/unavailable.");
+		log.info(key + " is broken/unavailable.");
 		brokenProjectIDs.add(key);
 	    }
 	}

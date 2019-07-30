@@ -9,9 +9,6 @@ public class MurmurHash2 {
     
     private MurmurHash2() {}
 
-    // Helps convert long to its unsigned value
-    // private static final long LONG_MASK = 0xFFFFFFFFFFFFFFFFL;
-
     // Helps convert integer to its unsigned value
     private static final long UINT_MASK = 0xFFFFFFFFl;
 

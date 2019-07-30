@@ -3,6 +3,7 @@ package com.hexii.updater;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,13 +17,11 @@ public class JSON {
     private static String currentfileID = null;
     private static String currentdownloadURL = null;
 
-    // public static final String userPreferredReleaseType = "Release";
-
     // https://addons-ecs.forgesvc.net/api/v2/addon/{fileID}/files
 
-    public static LinkedHashMap<String, List<String>> currentFileInfo(List<JSONObject> jsonObjectsTS) {
+    public static Map<String, List<String>> currentFileInfo(List<JSONObject> jsonObjectsTS) {
 
-	LinkedHashMap<String, List<String>> currentFileMap = new LinkedHashMap<String, List<String>>();
+	LinkedHashMap<String, List<String>> currentFileMap = new LinkedHashMap<>();
 
 	for (JSONObject jo : jsonObjectsTS) {
 
@@ -37,7 +36,7 @@ public class JSON {
 		currentfileID = file.get("id").toString();
 	    }
 	    
-	    List<String> namePlusID = new ArrayList<String>();
+	    List<String> namePlusID = new ArrayList<>();
 	    namePlusID.add(0, currentfileName);
 	    namePlusID.add(1, currentdownloadURL);
 	    namePlusID.add(2, currentfileID);
@@ -50,9 +49,9 @@ public class JSON {
 
     }
 
-    public static ArrayList<JSONObject> removeIrrelevantGameVersions(JSONArray ja, String userGameVersion) {
+    public static List<JSONObject> removeIrrelevantGameVersions(JSONArray ja, String userGameVersion) {
 
-	ArrayList<JSONObject> newList = new ArrayList<JSONObject>();
+	ArrayList<JSONObject> newList = new ArrayList<>();
 
 	for (int i = 0; i < ja.length(); i++) {
 
@@ -75,7 +74,7 @@ public class JSON {
 
     }
 
-    public static JSONObject findBestFile(ArrayList<JSONObject> joAL) {
+    public static JSONObject findBestFile(List<JSONObject> joAL) {
 
 	int bestFileIndex = Integer.MAX_VALUE;
 	long lowestDifference = Long.MAX_VALUE;

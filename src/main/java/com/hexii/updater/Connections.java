@@ -10,7 +10,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -51,8 +50,8 @@ public final class Connections {
 	hashes.parallelStream().forEach(hash -> {
 	    try {
 
-		URL API = new URL("https://addons-ecs.forgesvc.net/api/v2/fingerprint");
-		HttpURLConnection con = (HttpURLConnection) API.openConnection();
+		URL url = new URL("https://addons-ecs.forgesvc.net/api/v2/fingerprint");
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
 		// Header
 		con.setRequestMethod("POST");
@@ -99,7 +98,7 @@ public final class Connections {
      * can utilize the projectID in a browser by navigating to:
      * https://www.curseforge.com/projects/{addonID}
      */
-    public static Map<String, JSONArray> connectWithProjectID(LinkedHashMap<String, List<String>> projectIDs) {
+    public static Map<String, JSONArray> connectWithProjectID(Map<String, List<String>> projectIDs) {
 
 	log.info("Attempting to connect to the Twitch API with the projectIDs...");
 
