@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class JSON {
+    
+    private JSON() {}
 
     private static String currentfileName = null;
     private static String currentprojectID = null;

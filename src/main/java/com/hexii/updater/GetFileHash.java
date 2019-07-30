@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetFileHash {
+    
+    private GetFileHash() {}
 
     // Gets the 32-bit MurmurHash2 of the .jar file
     public static long getFileHash(Path path) throws IOException {

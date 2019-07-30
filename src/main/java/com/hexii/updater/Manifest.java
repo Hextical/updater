@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Manifest {
+    
+    private Manifest() {}
 
     public static JSONObject createManifest(String gameVersion, String forgeVersion, String name, String version) {
 	JSONObject manifest = new JSONObject();

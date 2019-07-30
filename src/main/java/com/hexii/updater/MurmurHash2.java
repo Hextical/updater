@@ -6,6 +6,8 @@
 package com.hexii.updater;
 
 public class MurmurHash2 {
+    
+    private MurmurHash2() {}
 
     // Helps convert long to its unsigned value
     // private static final long LONG_MASK = 0xFFFFFFFFFFFFFFFFL;

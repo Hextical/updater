@@ -6,6 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Logging {
+    
+    private Logging() {}
 
     private static final Logger log = LogManager.getLogger(Logging.class);
 
