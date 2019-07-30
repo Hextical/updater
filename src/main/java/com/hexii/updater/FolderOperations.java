@@ -40,10 +40,8 @@ public final class FolderOperations {
 
 	log.info("Reading folder: " + path);
 
-	List<Path> subfolder = Files.walk(Paths.get(path), 10).filter(p -> p.toString().endsWith(extension))
+	return Files.walk(Paths.get(path), 10).filter(p -> p.toString().endsWith(extension))
 		.collect(Collectors.toList());
-
-	return subfolder;
 
     }
 

@@ -46,9 +46,7 @@ public class Time {
 	long duration = startDate.getTime() - endDate.getTime();
 
 	// Milliseconds to minute conversion
-	long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-
-	return diffInMinutes;
+	return TimeUnit.MILLISECONDS.toMinutes(duration);
 
     }
 
