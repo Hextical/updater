@@ -73,7 +73,9 @@ public final class Connections {
         final String jsonText = readAll(in);
         final JSONObject json = new JSONObject(jsonText);
 
-        jsonObject.add(json);
+        if (JSONUtils.validJSON(json)) {
+          jsonObject.add(json);
+        }
 
         in.close();
         con.disconnect();

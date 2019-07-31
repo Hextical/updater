@@ -1,4 +1,4 @@
-package com.hexii.updater;
+package com.hexii.updater.filehandler;
 
 import java.io.IOException;
 import java.nio.file.Files;

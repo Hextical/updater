@@ -1,19 +1,20 @@
 package com.hexii.updater;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import com.hexii.updater.filehandler.FolderOperations;
 
 public class Updater {
 
   private static final Logger LOGGER = LogManager.getLogger(Updater.class);
+
+  public static String USERPATH;
+  public static String USERGAMEVERSION;
 
   public static void main(String[] args) throws IOException {
 
@@ -23,8 +24,8 @@ public class Updater {
     long timeStart = System.nanoTime();
 
     // Path & Game Version
-    final String USERPATH = args[0];
-    final String USERGAMEVERSION = args[1];
+    USERPATH = args[0];
+    USERGAMEVERSION = args[1];
 
     // All hashes of JARs
     List<Long> hashes = FolderOperations.folderToHash(USERPATH);
@@ -34,7 +35,7 @@ public class Updater {
 
     // Key: currentprojectID
     // Value: currentfileName[0] currentfileID[1]
-    Map<String, List<String>> currentFileMap = JSON.currentFileInfo(jsonObject);
+    Map<String, List<String>> currentFileMap = JSON.cleanupOldFiles(jsonObject);
 
     // Contains a bunch of currentprojectIDs with the JSONArrays found when connecting with the
     // addonID from the Twitch API
@@ -42,30 +43,7 @@ public class Updater {
 
     // Key: newprojectID
     // Value: newfileName[0] newfileID[1]
-    Map<String, List<String>> newFileMap = new HashMap<>();
-
-    // Contains a list of broken projectIDs
-    List<String> brokenProjectIDs = Collections.synchronizedList(new ArrayList<String>());
-
-    for (String key : jsons.keySet()) {
-      List<JSONObject> removedstuff =
-          JSONUtils.removeIrrelevantGameVersions(jsons.get(key), USERGAMEVERSION);
-
-      if (!removedstuff.toString().equals("[]")) {
-        JSONObject bestFile = JSONUtils.findBestFile(removedstuff);
-        String filename = bestFile.get("fileName").toString();
-        String downloadURL = bestFile.get("downloadUrl").toString();
-        String fileID = bestFile.get("id").toString();
-        List<String> stuff = new ArrayList<>();
-        stuff.add(0, filename);
-        stuff.add(1, downloadURL);
-        stuff.add(2, fileID);
-        newFileMap.put(key, stuff);
-      } else {
-        LOGGER.info(key + " is broken/unavailable.");
-        brokenProjectIDs.add(key);
-      }
-    }
+    Map<String, List<String>> newFileMap = JSON.cleanupNewFiles(jsons);
 
     int updates = 0;
     for (String key : newFileMap.keySet()) {
@@ -81,7 +59,6 @@ public class Updater {
 
     JSONObject old = Manifest.createManifest(USERGAMEVERSION, "forge-14.23.5.2836", "", "");
     old = Manifest.addFiles(currentFileMap, old);
-
 
     LOGGER.info(manifest);
     LOGGER.info(old);

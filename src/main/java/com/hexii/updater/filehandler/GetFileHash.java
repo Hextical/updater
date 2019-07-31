@@ -1,10 +1,11 @@
-package com.hexii.updater;
+package com.hexii.updater.filehandler;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import com.sangupta.murmur.Murmur2;
 
 public final class GetFileHash {
 
@@ -37,7 +38,7 @@ public final class GetFileHash {
       result[i] = noWs.get(i).byteValue();
     }
 
-    return MurmurHash2.hash(result, 1);
+    return Murmur2.hash(result, result.length, 1);
 
   }
 

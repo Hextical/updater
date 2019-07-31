@@ -1,11 +1,18 @@
 package com.hexii.updater;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public final class JSONUtils {
+  
+  private static final Logger LOGGER = LogManager.getLogger(JSONUtils.class);
+  
+  private static List<Long> brokenHashes = Collections.synchronizedList(new ArrayList<>());
 
   private JSONUtils() {}
 
@@ -54,6 +61,20 @@ public final class JSONUtils {
     }
 
     return joAL.get(bestFileIndex);
+  }
+  
+  public static boolean validJSON(JSONObject json) {
+    
+    JSONArray exactMatches = (JSONArray) json.get("exactMatches");
+    boolean result = exactMatches.isEmpty();
+    if (result) {
+      long hash = (long) ((JSONArray) json.get("installedFingerprints")).get(0);
+      brokenHashes.add(hash);
+      LOGGER.info("DNE hash on CurseForge: " + hash);
+    }
+    
+    return !result;
+    
   }
 
 
