@@ -13,8 +13,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class FolderOperations {
-  
+
   private static final String EXTENSION = ".jar";
+  private static final int WALK_DEPTH = 10;
 
   private static final Logger LOGGER = LogManager.getLogger(FolderOperations.class);
 
@@ -42,7 +43,7 @@ public final class FolderOperations {
 
     List<Path> result = new ArrayList<>();
 
-    try (Stream<Path> walk = Files.walk(Paths.get(path), 10)) {
+    try (Stream<Path> walk = Files.walk(Paths.get(path), WALK_DEPTH)) {
       result = walk.filter(p -> p.toString().endsWith(EXTENSION)).collect(Collectors.toList());
     } catch (IOException e) {
       LOGGER.error("Cannot read folder");

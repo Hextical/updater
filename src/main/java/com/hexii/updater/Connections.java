@@ -22,9 +22,9 @@ import org.json.JSONObject;
 // For documentation on the Twitch API check out: https://twitchappapi.docs.apiary.io/
 
 public final class Connections {
-  
+
   private static final Logger LOGGER = LogManager.getLogger(Connections.class);
-  
+
   private Connections() {}
 
   // StackOverflow

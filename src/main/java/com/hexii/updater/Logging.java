@@ -8,7 +8,7 @@ public final class Logging {
 
   private static final Logger LOGGER = LogManager.getLogger(Logging.class);
 
-  
+
   private Logging() {}
 
   public static void extraLogs(long timeStart, long timeEnd, long updates) {

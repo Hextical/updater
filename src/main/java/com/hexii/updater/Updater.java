@@ -36,19 +36,23 @@ public class Updater {
     // Value: currentfileName[0] currentfileID[1]
     Map<String, List<String>> currentFileMap = JSON.currentFileInfo(jsonObject);
 
+    // Contains a bunch of currentprojectIDs with the JSONArrays found when connecting with the
+    // addonID from the Twitch API
     Map<String, JSONArray> jsons = Connections.connectWithProjectID(currentFileMap);
-    Map<String, List<String>> newMap = new HashMap<>();
 
+    // Key: newprojectID
+    // Value: newfileName[0] newfileID[1]
+    Map<String, List<String>> newFileMap = new HashMap<>();
+
+    // Contains a list of broken projectIDs
     List<String> brokenProjectIDs = Collections.synchronizedList(new ArrayList<String>());
-    
-    // This will be gone soon (in a different file)...
 
     for (String key : jsons.keySet()) {
       List<JSONObject> removedstuff =
-          JSON.removeIrrelevantGameVersions(jsons.get(key), USERGAMEVERSION);
+          JSONUtils.removeIrrelevantGameVersions(jsons.get(key), USERGAMEVERSION);
 
       if (!removedstuff.toString().equals("[]")) {
-        JSONObject bestFile = JSON.findBestFile(removedstuff);
+        JSONObject bestFile = JSONUtils.findBestFile(removedstuff);
         String filename = bestFile.get("fileName").toString();
         String downloadURL = bestFile.get("downloadUrl").toString();
         String fileID = bestFile.get("id").toString();
@@ -56,7 +60,7 @@ public class Updater {
         stuff.add(0, filename);
         stuff.add(1, downloadURL);
         stuff.add(2, fileID);
-        newMap.put(key, stuff);
+        newFileMap.put(key, stuff);
       } else {
         LOGGER.info(key + " is broken/unavailable.");
         brokenProjectIDs.add(key);
@@ -64,16 +68,16 @@ public class Updater {
     }
 
     int updates = 0;
-    for (String key : newMap.keySet()) {
-      if (!newMap.get(key).get(0).equals(currentFileMap.get(key).get(0))) {
-        LOGGER.info(newMap.get(key).get(0));
-        LOGGER.info("\t" + newMap.get(key).get(1));
+    for (String key : newFileMap.keySet()) {
+      if (!newFileMap.get(key).get(0).equals(currentFileMap.get(key).get(0))) {
+        LOGGER.info(newFileMap.get(key).get(0));
+        LOGGER.info("\t" + newFileMap.get(key).get(1));
         updates++;
       }
     }
 
     JSONObject manifest = Manifest.createManifest(USERGAMEVERSION, "forge-14.23.5.2836", "", "");
-    manifest = Manifest.addFiles(newMap, manifest);
+    manifest = Manifest.addFiles(newFileMap, manifest);
 
     JSONObject old = Manifest.createManifest(USERGAMEVERSION, "forge-14.23.5.2836", "", "");
     old = Manifest.addFiles(currentFileMap, old);

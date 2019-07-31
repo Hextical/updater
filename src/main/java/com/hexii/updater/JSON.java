@@ -1,18 +1,26 @@
 package com.hexii.updater;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public final class JSON {
-  
-  private static String currentfileName;
+
   private static String currentprojectID;
+  private static String currentfileName;
   private static String currentfileID;
   private static String currentdownloadURL;
+
+  private static final byte FILE_NAME_INDEX = 0;
+  private static final byte DOWNLOAD_URL_INDEX = 1;
+  private static final byte FILE_ID_INDEX = 2;
+
+  private static final Logger LOGGER = LogManager.getLogger(JSON.class);
 
   private JSON() {}
 
@@ -20,7 +28,7 @@ public final class JSON {
 
   public static Map<String, List<String>> currentFileInfo(Iterable<JSONObject> jsonObjectsTS) {
 
-    LinkedHashMap<String, List<String>> currentFileMap = new LinkedHashMap<>();
+    Map<String, List<String>> currentFileMap = new ConcurrentHashMap<>();
 
     for (JSONObject jo : jsonObjectsTS) {
 
@@ -33,66 +41,24 @@ public final class JSON {
         currentfileName = file.getString("fileName");
         currentdownloadURL = file.get("downloadUrl").toString();
         currentfileID = file.get("id").toString();
+
       }
 
       List<String> namePlusID = new ArrayList<>();
-      namePlusID.add(0, currentfileName);
-      namePlusID.add(1, currentdownloadURL);
-      namePlusID.add(2, currentfileID);
 
-      currentFileMap.put(currentprojectID, namePlusID);
+      try {
+        namePlusID.add(FILE_NAME_INDEX, currentfileName);
+        namePlusID.add(DOWNLOAD_URL_INDEX, currentdownloadURL);
+        namePlusID.add(FILE_ID_INDEX, currentfileID);
+        currentFileMap.put(currentprojectID, namePlusID);
+      } catch (NullPointerException e) {
+        LOGGER.error("Error: " + e + " Object passed in: " + jo);
+      }
 
     }
 
     return currentFileMap;
 
-  }
-
-  public static List<JSONObject> removeIrrelevantGameVersions(JSONArray ja,
-      String userGameVersion) {
-
-    ArrayList<JSONObject> newList = new ArrayList<>();
-
-    for (int i = 0; i < ja.length(); i++) {
-
-      JSONObject jo = (JSONObject) ja.get(i);
-      JSONArray gv = (JSONArray) jo.get("gameVersion");
-
-      for (int j = 0; j < gv.length(); j++) {
-
-        String fileGameVersion = (String) gv.get(j);
-
-        if (fileGameVersion.equals(userGameVersion)) {
-          newList.add(jo);
-        }
-
-      }
-
-    }
-
-    return newList;
-
-  }
-
-  public static JSONObject findBestFile(List<JSONObject> joAL) {
-
-    int bestFileIndex = Integer.MAX_VALUE;
-    long lowestDifference = Long.MAX_VALUE;
-
-    for (int i = 0; i < joAL.size(); i++) {
-
-      JSONObject jo = joAL.get(i);
-      String time = jo.getString("fileDate");
-      long difference = Time.timeDifferenceMinutes(time);
-
-      if (difference < lowestDifference) {
-        bestFileIndex = i;
-        lowestDifference = difference;
-      }
-
-    }
-
-    return joAL.get(bestFileIndex);
   }
 
 }
